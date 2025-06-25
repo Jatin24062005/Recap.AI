@@ -1,35 +1,17 @@
+const { spawn } = require('child_process');
+const path = require('path');
+const fs = require('fs');
+
 // joinMeetBot.js
 const { Builder, By, until } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 require('dotenv').config();
 
-const joinMeetBot = async (meetUrl) => {
+
+const joinMeetBot = async (driver ,meetUrl) => {
   const email = process.env.GOOGLE_EMAIL;
   const password = process.env.GOOGLE_PASSWORD;
 
-  const options = new chrome.Options();
-
-  // ✅ Your pre-logged-in Chrome user profile
-
-
-  options.setUserPreferences({
-    'profile.default_content_setting_values.media_stream_mic': 2,
-    'profile.default_content_setting_values.media_stream_camera': 2,
-    'profile.default_content_setting_values.notifications': 2
-  });
-
-  // ✅ Chrome flags for stability and stealth
-  options.addArguments(
-    '--disable-notifications',
-    '--disable-infobars',
-    '--no-sandbox',
-    '--disable-dev-shm-usage',
-    '--disable-blink-features=AutomationControlled',
-    '--disable-gpu',
-    '--start-maximized'
-  );
-
-  const driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
 
   try {
     await driver.get('https://accounts.google.com/signin');
@@ -87,10 +69,36 @@ const joinMeetBot = async (meetUrl) => {
   }
 };
 
-const StartRecording = async ()=> {
 
-}
-const StopRecording = async ()=> {
+const RECORDINGS_DIR = path.join(__dirname, '../recordings');
+if (!fs.existsSync(RECORDINGS_DIR)) fs.mkdirSync(RECORDINGS_DIR);
+
+function startScreenRecording(filename = `recording-${Date.now()}.mkv`) {
+  const filePath = path.join(RECORDINGS_DIR, filename);
+
+ const ffmpegProcess = spawn('ffmpeg', [
+  '-y',
+  '-f', 'gdigrab',
+  '-framerate', '30',
+  '-i', 'desktop', // This should capture the full screen
+  '-vcodec', 'libx264',               // ✅ Standard codec
+  '-preset', 'veryfast',
+  '-pix_fmt', 'yuv420p',              // ✅ Required for compatibility
+  '-r', '30',
+  '-crf', '23',
+  '-t', '00:10:00',                   // Optional duration cap
+  filePath,
+]);
+ // fallback: max 1 hour
+   
+
+  ffmpegProcess.stderr.on('data', (data) => {
+    console.log(`🎥 ffmpeg: ${data}`);
+  });
+
+  return { ffmpegProcess, filePath };
 }
 
-module.exports = joinMeetBot;
+module.exports = { startScreenRecording, joinMeetBot };
+
+
