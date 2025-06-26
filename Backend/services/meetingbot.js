@@ -1,14 +1,19 @@
-const { spawn } = require('child_process');
-const path = require('path');
-const fs = require('fs');
+// meetingbot.js
+import { spawn } from 'child_process';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { Builder, By, until } from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
-// joinMeetBot.js
-const { Builder, By, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-require('dotenv').config();
+// ✅ Setup __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
-const joinMeetBot = async (driver ,meetUrl) => {
+ const joinMeetBot = async (driver ,meetUrl) => {
   const email = process.env.GOOGLE_EMAIL;
   const password = process.env.GOOGLE_PASSWORD;
 
@@ -99,6 +104,7 @@ function startScreenRecording(filename = `recording-${Date.now()}.mkv`) {
   return { ffmpegProcess, filePath };
 }
 
-module.exports = { startScreenRecording, joinMeetBot };
+// ✅ ESM
+export { startScreenRecording, joinMeetBot };
 
 
