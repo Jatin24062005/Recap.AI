@@ -1,6 +1,7 @@
-const { Builder } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-const { startScreenRecording, joinMeetBot } = require('../services/meetingbot');
+import { Builder } from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome.js';
+import { startScreenRecording, joinMeetBot } from '../services/meetingbot.js';
+
 
 const RecapAI = async (meetUrl, userId) => {
   const options = new chrome.Options();
@@ -53,4 +54,4 @@ const RecapAI = async (meetUrl, userId) => {
   }
 };
 
-module.exports = RecapAI;
+export default RecapAI;
