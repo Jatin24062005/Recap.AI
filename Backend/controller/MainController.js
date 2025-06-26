@@ -1,8 +1,7 @@
 import { Builder } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import { startScreenRecording, joinMeetBot } from '../services/meetingbot.js';
-import { uploadRecordingToCloudinary } from '../utils/cloudinary.js';
-import { getVideoDuration } from '../utils/videoUtils.js'; // 👈 You'll need this
+import { uploadRecordingToCloudinary,getVideoDuration } from '../utils/cloudinary.js';
 import { Recording } from '../models/recording.model.js';
 import { User } from '../models/user.model.js';
 
