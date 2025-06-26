@@ -2,7 +2,7 @@ import RecapAI from "./MainController.js";
 
 export const joinBot = async (req, res) => {
   const url = await req.body.url;
-  const userId = req.user._id;
+  const userId = req.user.id;
 
   if (!url) {
     res.status(404).json({ message: "undefined Url", path: req.path, method: req.method });

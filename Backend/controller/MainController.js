@@ -1,7 +1,7 @@
 import { Builder } from 'selenium-webdriver';
 import chrome from 'selenium-webdriver/chrome.js';
 import { startScreenRecording, joinMeetBot } from '../services/meetingbot.js';
-import { uploadRecordingToCloudinary,getVideoDuration } from '../utils/cloudinary.js';
+import { uploadRecordingToCloudinary, getVideoDuration } from '../utils/cloudinary.js';
 import { Recording } from '../models/recording.model.js';
 import { User } from '../models/user.model.js';
 
@@ -36,18 +36,18 @@ const RecapAI = async (meetUrl, userId) => {
       try {
         ffmpegProcess.kill('SIGINT');
         await driver.quit();
-
+        const duration = await getVideoDuration(filePath); //in seconds
         const videoUrl = await uploadRecordingToCloudinary(filePath, userId);
-        const duration = await getVideoDuration(filePath);
 
-        const savedRecording = await Recording.create({
+
+        const newRecording = new Recording({
           title: 'Meeting Recording',
           meetUrl,
-          videoUrl,
-          duration,
+          videoUrl,duration,
           user: userId,
         });
-
+        const savedRecording = await newRecording.save();
+        console.log('📹 Recording uploaded to Cloudinary:', savedRecording);
         await User.findByIdAndUpdate(userId, {
           $push: { recordings: savedRecording._id }
         }, { new: true });
