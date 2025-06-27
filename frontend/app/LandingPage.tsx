@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -13,14 +12,13 @@ export default function LandingPage() {
   const heroRef = useRef(null);
   const subRef = useRef(null);
   const ctaRef = useRef(null);
-  const [url,setUrl] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleSendUrl = () => {
     if (!url) {
-        return toast.error("Please enter a Google Meet URL");
+      return toast.error("Please enter a Google Meet URL");
     }
-}
-
+  };
 
   useEffect(() => {
     gsap.fromTo(
@@ -43,7 +41,7 @@ export default function LandingPage() {
   return (
     <div>
       <Header />
-      <main className="min-h-screen bg-transparent text-foreground flex flex-col items-center justify-center px-6">
+      <main className="min-h-screen bg-transparent text-foreground flex flex-col items-center justify-center px-6 ">
         <h1
           ref={heroRef}
           className="text-4xl md:text-6xl font-bold text-center max-w-3xl"
@@ -63,7 +61,11 @@ export default function LandingPage() {
           <div className="flex w-full h-fit  items-center gap-2">
             <Input
               type="text"
-              className="w-fit px-14 pr-5 py-4"
+              className="w-fit px-14 pr-5 py-4 rounded-md text-white bg-transparent 
+             border border-white/30 
+             shadow-[0_0_15px_rgba(255,255,255,0.2)] 
+             focus:outline-none focus:ring-2 focus:ring-white/10 
+             transition-all duration-300"
               placeholder="Enter Google Meet Url"
               onChange={(e) => setUrl(e.target.value)}
             />
