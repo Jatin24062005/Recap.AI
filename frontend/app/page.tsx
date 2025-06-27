@@ -2,11 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Ghost } from "lucide-react";
 import Image from "next/image";
+import LandingPage from "./LandingPage";
+import BackgroundParticles from "@/components/BackgroundParticles";
+import Header from "@/components/Header";
+import FeaturesSection from "@/components/featuresSection";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center bg-background-400 justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-   
+    <div className="">
+      <BackgroundParticles />
+      <LandingPage />
+      <FeaturesSection />
     </div>
   );
 }
