@@ -8,21 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Footer() {
   const footerRef = useRef(null);
 
-  useEffect(() => {
-    if (!footerRef.current) return;
-
-    gsap.from(footerRef.current, {
-      opacity: 0,
-      y: 60,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: "top 90%", // trigger animation earlier
-        toggleActions: "play none none none",
-      },
-    });
-  }, []);
 
   return (
     <footer
