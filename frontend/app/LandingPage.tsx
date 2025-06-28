@@ -7,17 +7,44 @@ import Header from "@/components/Header";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { toast } from "sonner";
+import { useUser } from "@/context/AuthContext";
+import axiosInstance from "@/utils/axios";
+import Cookie from "js-cookie"; // Import js-cookie to manage cookies
 
 export default function LandingPage() {
   const heroRef = useRef(null);
   const subRef = useRef(null);
   const ctaRef = useRef(null);
   const [url, setUrl] = useState("");
+  const { user } = useUser();
+  const token = Cookie.get("token"); // Get token from cookies
 
-  const handleSendUrl = () => {
+  const handleSendUrl = async () => {
+    if (!user || !token) {
+      // If user is not logged in, show an error message
+      toast.error("Please log_in to start recording");
+    }
     if (!url) {
       return toast.error("Please enter a Google Meet URL");
     }
+
+    try {
+      // Your API call or logic to send the URL goes here
+      const response = await axiosInstance.post("/meeting", {
+        url,
+      });
+      console.log(response); 
+      if (response.status === 200) {
+        toast.success("Recap.Ai started successfully");
+        
+        // Optionally, redirect to a recording page or update UI
+      } else {
+        toast.error("Failed to start recording");
+      }
+
+    } catch (error) {
+      toast.error("Failed to start recording");
+    } 
   };
 
   useEffect(() => {
