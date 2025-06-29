@@ -33,6 +33,7 @@ const data = {
     avatar: "/avatars/user.jpg",
   },
   navMain: [
+    { title: "Profile", url: "/profile", icon: IconDashboard },
   ],
   navSecondary: [
     { title: "Settings", url: "/settings", icon: IconSettings },
@@ -58,7 +59,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        <NavMain
+      <NavMain
           items={data.navMain.map((item) => ({
             ...item,
             isActive: pathname === item.url,

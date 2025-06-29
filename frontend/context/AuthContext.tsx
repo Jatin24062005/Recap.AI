@@ -2,7 +2,12 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 
-export const UserContext = createContext(null);
+interface UserContextType {
+  user: object | null;
+  setUser: React.Dispatch<React.SetStateAction<object | null>>;
+}
+
+export const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<object | null>(null); // initially no user

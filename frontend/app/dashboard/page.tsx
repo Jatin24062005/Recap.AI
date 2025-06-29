@@ -1,7 +1,6 @@
 'use client';
 import React from "react"
 import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
 import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
@@ -9,8 +8,10 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
+import dataJson from "./data.json"
+import { schema } from "../../components/data-table" // adjust path if needed
 
-import data from "./data.json"
+const data = schema.array().parse(dataJson);
 
 export default function Page() {
   return (
