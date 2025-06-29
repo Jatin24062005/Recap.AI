@@ -16,7 +16,6 @@ export default function LandingPage() {
   const subRef = useRef(null);
   const ctaRef = useRef(null);
   const [url, setUrl] = useState("");
-  const { user } = useUser();
   const token = Cookie.get("token"); // Get token from cookies
 
   const handleSendUrl = async () => {
