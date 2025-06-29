@@ -45,7 +45,7 @@ const Header = () => {
           {navLists.map((nav) => (
             <Link
               key={nav}
-              href={`#${nav.toLowerCase().replace(/ /g, "-")}`}
+              href={ nav ==="Dashboard"? '/dashboard':`#${nav.toLowerCase().replace(/ /g, "-")}`}
               className="text-sm text-muted-foreground hover:text-white transition-all"
             >
               {nav}
