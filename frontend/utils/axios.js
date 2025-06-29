@@ -1,26 +1,24 @@
 // utils/axios.js
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import Router from 'next/navigation'; // Import Next.js Router to handle redirects
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Router } from "next/navigation"; // Import Next.js Router to handle redirects
 
 // Create an Axios instance
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
   withCredentials: true,
 });
 
-
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = Cookies.get('token');
+    const token = Cookies.get("token");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`; 
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-    
   },
   (error) => {
     return Promise.reject(error);
@@ -35,10 +33,13 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     // Check for 401 (Unauthorized) or 403 (Forbidden) status codes
-    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+    if (
+      error.response &&
+      (error.response.status === 401 || error.response.status === 403)
+    ) {
       // Remove the token if unauthorized and redirect to the unauthorized page
-      Cookies.remove('token'); // Optionally remove token from cookies
-      Router.push('/unauthorized'); // Redirect to the unauthorized page
+      Cookies.remove("token"); // Optionally remove token from cookies
+      Router.push("/unauthorized"); // Redirect to the unauthorized page
     }
 
     // Return the error if not 401 or 403

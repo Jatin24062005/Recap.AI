@@ -5,9 +5,7 @@ import gsap from "gsap";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import { toast } from "sonner";
-import { useUser } from "@/context/AuthContext";
 import axiosInstance from "@/utils/axios";
 import Cookie from "js-cookie"; // Import js-cookie to manage cookies
 
