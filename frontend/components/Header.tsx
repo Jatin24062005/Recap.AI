@@ -65,7 +65,7 @@ const Header = () => {
             <Button
               variant="ghost"
               onClick={handleLogout}
-              className="text-sm px-4 py-2 rounded-md bg-destructive text-destructive-foreground hover:opacity-90 transition"
+              className="text-sm px-4 py-2 rounded-md bg-destructive text-destructive-foreground hover:opacity-90 hover:text-white transition"
             >
               Logout
             </Button>
