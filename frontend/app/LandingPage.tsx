@@ -19,7 +19,7 @@ export default function LandingPage() {
   const token = Cookie.get("token"); // Get token from cookies
 
   const handleSendUrl = async () => {
-    if (!user || !token) {
+    if (  !token) {
       // If user is not logged in, show an error message
       toast.error("Please log_in to start recording");
     }
