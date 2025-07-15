@@ -81,21 +81,32 @@ if (!fs.existsSync(RECORDINGS_DIR)) fs.mkdirSync(RECORDINGS_DIR);
 function startScreenRecording(filename = `recording-${Date.now()}.mkv`) {
   const filePath = path.join(RECORDINGS_DIR, filename);
 
- const ffmpegProcess = spawn('ffmpeg', [
+const ffmpegProcess = spawn('ffmpeg', [
   '-y',
+
+  // 🎥 Screen capture
   '-f', 'gdigrab',
   '-framerate', '30',
-  '-i', 'desktop', // This should capture the full screen
-  '-vcodec', 'libx264',               // ✅ Standard codec
+  '-i', 'desktop',
+
+  // 🎙️ System audio capture
+  '-f', 'dshow',
+  '-i', 'audio=virtual-audio-capturer',
+
+  // ✅ Encoding settings
+  '-vcodec', 'libx264',
+  '-acodec', 'aac',
   '-preset', 'veryfast',
-  '-pix_fmt', 'yuv420p',              // ✅ Required for compatibility
+  '-pix_fmt', 'yuv420p',
   '-r', '30',
   '-crf', '23',
-  '-t', '00:10:00',                   // Optional duration cap
+  '-t', '00:10:00',
+
+  // 📁 Output file
   filePath,
 ]);
- // fallback: max 1 hour
-   
+
+
 
   ffmpegProcess.stderr.on('data', (data) => {
     console.log(`🎥 ffmpeg: ${data}`);
