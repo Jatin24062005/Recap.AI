@@ -4,6 +4,8 @@ import { startScreenRecording, joinMeetBot } from '../services/meetingbot.js';
 import { uploadRecordingToCloudinary, getVideoDuration } from '../utils/cloudinary.js';
 import { Recording } from '../models/recording.model.js';
 import { User } from '../models/user.model.js';
+import { extractAudioFromVideo } from './ExtactAudioFromVideo.js';
+import { summarizeTranscript } from './GenerateTranscriptAndSummary.js';
 
 const RecapAI = async (meetUrl, userId) => {
   const options = new chrome.Options();
@@ -37,6 +39,10 @@ const RecapAI = async (meetUrl, userId) => {
         ffmpegProcess.kill('SIGINT');
         await driver.quit();
         const duration = await getVideoDuration(filePath); //in seconds
+        const audioPath = await extractAudioFromVideo(filePath,"TestingAudio.mp3");
+
+        const transcript = await summarizeTranscript(audioPath);
+        console.log('📝 Transcript:', transcript);
         const videoUrl = await uploadRecordingToCloudinary(filePath, userId);
 
 
@@ -46,6 +52,7 @@ const RecapAI = async (meetUrl, userId) => {
           videoUrl,duration,
           user: userId,
         });
+        
         const savedRecording = await newRecording.save();
         console.log('📹 Recording uploaded to Cloudinary:', savedRecording);
         await User.findByIdAndUpdate(userId, {
