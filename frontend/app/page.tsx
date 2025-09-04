@@ -30,7 +30,7 @@ import {
   SkipBack,
   SkipForward,
 } from "lucide-react"
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
+import { motion, useScroll, useTransform, useInView, AnimationGeneratorType, Variants } from "framer-motion"
 import {
   LineChart,
   Line,
@@ -140,7 +140,7 @@ export default function MeetBotLanding() {
     },
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
@@ -153,7 +153,7 @@ export default function MeetBotLanding() {
     },
   }
 
-  const floatingVariants = {
+  const floatingVariants: Variants = {
     animate: {
       y: [-10, 10, -10],
       transition: {
@@ -164,7 +164,7 @@ export default function MeetBotLanding() {
     },
   }
 
-  const pulseVariants = {
+  const pulseVariants: Variants = {
     animate: {
       scale: [1, 1.05, 1],
       transition: {
@@ -641,7 +641,6 @@ export default function MeetBotLanding() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.5, type: "spring" }}
                   variants={pulseVariants}
-                  animate="animate"
                 >
                   <Mic className="w-6 h-6 text-white" />
                 </motion.div>
@@ -652,7 +651,6 @@ export default function MeetBotLanding() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.7, type: "spring" }}
                   variants={floatingVariants}
-                  animate="animate"
                 >
                   <Video className="w-5 h-5 text-white" />
                 </motion.div>
