@@ -50,43 +50,39 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Input } from "@/components/ui/input"
 import { LoginModal } from "@/components/login-modal"
 
-// ----------------------
+// Sample data for charts
 const meetingData = [
-{ month: "Jan", meetings: 45, transcribed: 42, accuracy: 96 },
-{ month: "Feb", meetings: 52, transcribed: 50, accuracy: 97 },
-{ month: "Mar", meetings: 48, transcribed: 47, accuracy: 98 },
-{ month: "Apr", meetings: 61, transcribed: 60, accuracy: 98 },
-{ month: "May", meetings: 55, transcribed: 54, accuracy: 99 },
-{ month: "Jun", meetings: 67, transcribed: 66, accuracy: 99 },
-];
+  { month: "Jan", meetings: 45, transcribed: 42, accuracy: 96 },
+  { month: "Feb", meetings: 52, transcribed: 50, accuracy: 97 },
+  { month: "Mar", meetings: 48, transcribed: 47, accuracy: 98 },
+  { month: "Apr", meetings: 61, transcribed: 60, accuracy: 98 },
+  { month: "May", meetings: 55, transcribed: 54, accuracy: 99 },
+  { month: "Jun", meetings: 67, transcribed: 66, accuracy: 99 },
+]
 
-
-const accuracyVendors = [
-{ name: "Whisper AI", value: 99 },
-{ name: "Google Speech", value: 94 },
-{ name: "Azure Speech", value: 91 },
-{ name: "AWS Transcribe", value: 88 },
-];
-
+const accuracyData = [
+  { name: "Whisper AI", value: 99, color: "#000000" },
+  { name: "Google Speech", value: 94, color: "#666666" },
+  { name: "Azure Speech", value: 91, color: "#999999" },
+  { name: "AWS Transcribe", value: 88, color: "#cccccc" },
+]
 
 const performanceData = [
-{ time: "0s", cpu: 12, memory: 45, network: 23 },
-{ time: "30s", cpu: 25, memory: 52, network: 67 },
-{ time: "60s", cpu: 18, memory: 48, network: 45 },
-{ time: "90s", cpu: 22, memory: 55, network: 78 },
-{ time: "120s", cpu: 15, memory: 42, network: 34 },
-{ time: "150s", cpu: 28, memory: 58, network: 89 },
-];
-
+  { time: "0s", cpu: 12, memory: 45, network: 23 },
+  { time: "30s", cpu: 25, memory: 52, network: 67 },
+  { time: "60s", cpu: 18, memory: 48, network: 45 },
+  { time: "90s", cpu: 22, memory: 55, network: 78 },
+  { time: "120s", cpu: 15, memory: 42, network: 34 },
+  { time: "150s", cpu: 28, memory: 58, network: 89 },
+]
 
 const usageStats = [
-{ feature: "Auto Join", usage: 98 },
-{ feature: "Recording", usage: 95 },
-{ feature: "Transcription", usage: 92 },
-{ feature: "API Storage", usage: 88 },
-{ feature: "Real-time Access", usage: 85 },
-];
-
+  { feature: "Auto Join", usage: 98 },
+  { feature: "Recording", usage: 95 },
+  { feature: "Transcription", usage: 92 },
+  { feature: "API Storage", usage: 88 },
+  { feature: "Real-time Access", usage: 85 },
+]
 
 export default function MeetBotLanding() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -124,6 +120,15 @@ export default function MeetBotLanding() {
   }, [])
 
   // Auto-play demo simulation
+
+    useEffect(() => {
+    const id = setTimeout(
+      () => window.dispatchEvent(new Event("resize")),
+      0
+    );
+    return () => clearTimeout(id);
+  }, []);
+
   useEffect(() => {
     if (isPlaying) {
       const interval = setInterval(() => {
@@ -802,7 +807,7 @@ export default function MeetBotLanding() {
                       title: "Transcript generated",
                       desc: "AI processing completed for project review",
                       time: "5m ago",
-                      color: ""
+                      color: "bg-white"
                     },
                     {
                       icon: "💾",
@@ -1291,114 +1296,138 @@ export default function MeetBotLanding() {
           <div className="grid lg:grid-cols-2 gap-8 mb-16">
             {/* Meeting Analytics Chart */}
             <motion.div
-              className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-neutral-800"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Meeting Analytics</h3>
-                <div className="flex gap-2">
-                  <div className="flex items-center gap-2 text-sm">
-                    <div className="w-3 h-3 bg-black dark:bg-white rounded-full" />
-                    <span className="text-neutral-600 dark:text-neutral-400">Meetings</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <div className="w-3 h-3 bg-neutral-400 rounded-full" />
-                    <span className="text-neutral-600 dark:text-neutral-400">Transcribed</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={meetingData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="currentColor" opacity={0.1} />
-                    <XAxis dataKey="month" stroke="currentColor" opacity={0.6} />
-                    <YAxis stroke="currentColor" opacity={0.6} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: "var(--background)",
-                        border: "1px solid var(--border)",
-                        borderRadius: "8px",
-                        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                        color: "var(--foreground)",
-                      }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="meetings"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                      dot={{ fill: "currentColor", strokeWidth: 2, r: 4 }}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="transcribed"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      opacity={0.6}
-                      dot={{ fill: "currentColor", strokeWidth: 2, r: 3, opacity: 0.6 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </motion.div>
-
-            {/* Transcription Accuracy Chart */}
-            <motion.div
-              className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-neutral-800"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">Transcription Accuracy</h3>
-
-              <div className="h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={accuracyVendors}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={100}
-                      paddingAngle={2}
-                      dataKey="value"
-                    >
-                      {accuracyVendors.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: "var(--background)",
-                        border: "1px solid var(--border)",
-                        borderRadius: "8px",
-                        color: "var(--foreground)",
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="space-y-3 mt-4">
-                {accuracyVendors.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item?.color }} />
-                      <span className="text-sm text-neutral-600 dark:text-neutral-400">{item.name}</span>
-                    </div>
-                    <span className="text-sm font-semibold text-neutral-900 dark:text-white">{item.value}%</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+      className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-neutral-800 w-full"
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-xl font-bold text-neutral-900 dark:text-white">Meeting Analytics</h3>
+        <div className="flex gap-2">
+          <div className="flex items-center gap-2 text-sm">
+            <div className="w-3 h-3 bg-black dark:bg-white rounded-full" />
+            <span className="text-neutral-600 dark:text-neutral-400">Meetings</span>
           </div>
- 
- 
+          <div className="flex items-center gap-2 text-sm">
+            <div className="w-3 h-3 bg-neutral-400 rounded-full" />
+            <span className="text-neutral-600 dark:text-neutral-400">Transcribed</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Force definite size and give SVG a color for currentColor to work */}
+      <div className="relative w-full px-2 mt-6 h-64 text-neutral-900 dark:text-neutral-100">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={meetingData}>
+            <CartesianGrid stroke="currentColor" strokeDasharray="3 3" strokeOpacity={0.1} />
+            <XAxis
+              dataKey="month"
+              stroke="currentColor"
+              tick={{ fill: "currentColor" }}
+              axisLine={{ stroke: "currentColor", strokeOpacity: 0.3 }}
+              tickLine={{ stroke: "currentColor", strokeOpacity: 0.3 }}
+            />
+            <YAxis
+              stroke="currentColor"
+              tick={{ fill: "currentColor" }}
+              axisLine={{ stroke: "currentColor", strokeOpacity: 0.3 }}
+              tickLine={{ stroke: "currentColor", strokeOpacity: 0.3 }}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "var(--background, #111827)",
+                border: "1px solid var(--border, #374151)",
+                borderRadius: "8px",
+                boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                color: "var(--foreground, #F9FAFB)",
+              }}
+            />
+            {/* Solid line for Meetings */}
+            <Line
+              type="monotone"
+              dataKey="meetings"
+              stroke="currentColor"
+              strokeWidth={3}
+              isAnimationActive={false}
+              dot={{ r: 4, stroke: "currentColor", fill: "currentColor" }}
+            />
+            {/* Lighter line for Transcribed */}
+            <Line
+              type="monotone"
+              dataKey="transcribed"
+              stroke="currentColor"
+              strokeOpacity={0.6}
+              strokeWidth={2}
+              isAnimationActive={false}
+              dot={{ r: 3, stroke: "currentColor", fill: "currentColor", strokeOpacity: 0.6 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </motion.div>
+            {/* Transcription Accuracy Chart */}
+    <motion.div
+      className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-neutral-800 w-full"
+      initial={{ opacity: 0, x: 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-6">
+        Transcription Accuracy
+      </h3>
+
+      <div className="relative w-full h-64">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={accuracyData}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={100}
+              paddingAngle={2}
+              dataKey="value"
+              isAnimationActive={false} // ← avoids clash with Motion
+            >
+              {accuracyData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "var(--background, #111827)",
+                border: "1px solid var(--border, #374151)",
+                borderRadius: "8px",
+                color: "var(--foreground, #F9FAFB)",
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="space-y-3 mt-4">
+        {accuracyData.map((item, index) => (
+          <div key={index} className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: item.color }}
+              />
+              <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                {item.name}
+              </span>
+            </div>
+            <span className="text-sm font-semibold text-neutral-900 dark:text-white">
+              {item.value}%
+            </span>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+          </div>
+
           {/* System Performance Chart */}
           <motion.div
             className="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 bg-white dark:bg-neutral-800"
