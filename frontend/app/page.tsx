@@ -29,8 +29,12 @@ import {
   Rewind,
   SkipBack,
   SkipForward,
+  Sun,
+  Moon,
 } from "lucide-react"
-import { motion, useScroll, useTransform, useInView, AnimationGeneratorType, Variants } from "framer-motion"
+import { motion, useScroll, useTransform, useInView } from "framer-motion"
+  import type { Variants } from "framer-motion"
+
 import {
   LineChart,
   Line,
@@ -46,9 +50,9 @@ import {
   Area,
 } from "recharts"
 import { Badge } from "@/components/ui/badge"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Input } from "@/components/ui/input"
 import { LoginModal } from "@/components/login-modal"
+import { Dashboard } from "@/components/dashboard"
 
 // Sample data for charts
 const meetingData = [
@@ -84,7 +88,7 @@ const usageStats = [
   { feature: "Real-time Access", usage: 85 },
 ]
 
-export default function MeetBotLanding() {
+export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(75)
@@ -94,6 +98,8 @@ export default function MeetBotLanding() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [loginMode, setLoginMode] = useState<"login" | "signup">("login")
   const [meetUrl, setMeetUrl] = useState("")
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   const heroRef = useRef<HTMLDivElement>(null)
   const featuresRef = useRef<HTMLDivElement>(null)
@@ -110,6 +116,19 @@ export default function MeetBotLanding() {
   const isStatsInView = useInView(statsRef, { once: true })
   const isDemoInView = useInView(demoRef, { once: true })
   const isPricingInView = useInView(pricingRef, { once: true })
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode)
+    document.documentElement.classList.toggle("dark")
+  }
+
+  const handleLogin = () => {
+    setIsAuthenticated(true)
+  }
+
+  const handleLogout = () => {
+    setIsAuthenticated(false)
+  }
 
   // Simulate real-time updates
   useEffect(() => {
@@ -129,7 +148,7 @@ export default function MeetBotLanding() {
     }
   }, [isPlaying])
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -139,6 +158,7 @@ export default function MeetBotLanding() {
       },
     },
   }
+
 
   const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
@@ -175,8 +195,12 @@ export default function MeetBotLanding() {
     },
   }
 
+  if (isAuthenticated) {
+    return <Dashboard onLogout={handleLogout} isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+  }
+
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white selection:bg-neutral-900 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-black overflow-x-hidden">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <motion.div
@@ -224,7 +248,7 @@ export default function MeetBotLanding() {
             >
               <Bot className="h-4 w-4 text-white" />
             </motion.div>
-            <span className="text-xl font-black tracking-tight">MeetBot.ai</span>
+            <span className="text-xl font-black tracking-tight text-neutral-900 dark:text-white">MeetBot.ai</span>
           </motion.div>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-600 dark:text-neutral-400">
@@ -250,7 +274,19 @@ export default function MeetBotLanding() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            <motion.button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? (
+                <Sun className="h-5 w-5 text-neutral-900 dark:text-white" />
+              ) : (
+                <Moon className="h-5 w-5 text-neutral-900 dark:text-white" />
+              )}
+            </motion.button>
             <motion.button
               onClick={() => {
                 setLoginMode("login")
@@ -1940,6 +1976,7 @@ export default function MeetBotLanding() {
         onClose={() => setIsLoginModalOpen(false)}
         mode={loginMode}
         onModeChange={setLoginMode}
+        onLogin={handleLogin}
       />
     </div>
   )
