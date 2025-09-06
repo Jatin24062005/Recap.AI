@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import type { Variants } from "framer-motion"
 import {
   Play,
   Square,
@@ -52,7 +53,7 @@ const transcriptionStats = [
   { month: "Apr", accuracy: 97, processed: 165 },
 ]
 
-const cardVariants = {
+const cardVariants:Variants = {
   hidden: {
     opacity: 0,
     y: 60,
@@ -82,7 +83,7 @@ const cardVariants = {
   },
 }
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -93,7 +94,7 @@ const staggerContainer = {
   },
 }
 
-const headerVariants = {
+const headerVariants: Variants = {
   hidden: { y: -100, opacity: 0 },
   visible: {
     y: 0,
@@ -107,7 +108,7 @@ const headerVariants = {
   },
 }
 
-const elementVariants = {
+const elementVariants: Variants = {
   hidden: { opacity: 0, x: -30, scale: 0.9 },
   visible: {
     opacity: 1,
@@ -453,9 +454,9 @@ export function Dashboard({ onLogout, isDarkMode, toggleTheme }: DashboardProps)
                     <motion.div
                       className="bg-muted/20 backdrop-blur-sm rounded-xl p-4 border border-border/30"
                       initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                      animate={{
+                       animate={{
+                        opacity: 1,
+                        y: 0,
                         boxShadow:
                           botStatus === "recording"
                             ? [

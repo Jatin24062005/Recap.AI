@@ -98,7 +98,7 @@ export default function Home() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [loginMode, setLoginMode] = useState<"login" | "signup">("login")
   const [meetUrl, setMeetUrl] = useState("")
-  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
 
   const heroRef = useRef<HTMLDivElement>(null)
