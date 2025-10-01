@@ -412,14 +412,14 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.6 }}
               >
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex-1">
+                <div className="flex flex-col sm:flex-row gap-4 ">
+                  <div className="flex-1  dark:border-neutral-700 dark:bg-neutral-900">
                     <Input
                       type="url"
                       placeholder="Enter Google Meet URL"
                       value={meetUrl}
                       onChange={(e) => setMeetUrl(e.target.value)}
-                      className="h-12 text-base"
+                      className="h-12 text-base dark:border-neutral-700 dark:bg-neutral-900 "
                     />
                   </div>
                   <motion.button
