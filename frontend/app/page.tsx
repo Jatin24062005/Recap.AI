@@ -248,7 +248,7 @@ export default function Home() {
             >
               <Bot className="h-4 w-4 text-white" />
             </motion.div>
-            <span className="text-xl font-black tracking-tight text-neutral-900 dark:text-white">MeetBot.ai</span>
+            <span className="text-xl font-black tracking-tight text-neutral-900 dark:text-white">Recap.ai</span>
           </motion.div>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-600 dark:text-neutral-400">
@@ -338,13 +338,13 @@ export default function Home() {
                 className="text-5xl leading-none font-black tracking-tight bg-gradient-to-b from-neutral-900 to-neutral-600 dark:from-white dark:to-neutral-400 bg-clip-text text-transparent"
                 variants={itemVariants}
               >
-                Meet
+                Recap
               </motion.p>
               <motion.p
                 className="text-2xl leading-tight font-black tracking-tight text-neutral-700 dark:text-neutral-300"
                 variants={itemVariants}
               >
-                Bot.ai
+                bot.ai
               </motion.p>
               <motion.div className="mt-4 space-y-2" variants={itemVariants}>
                 <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
@@ -550,7 +550,7 @@ export default function Home() {
                     </div>
                     <div className="flex-1 mx-4">
                       <div className="bg-white rounded-md px-3 py-1 text-xs font-mono text-neutral-500 border">
-                        meetbot.ai/dashboard
+                        Recap.ai/dashboard
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
@@ -718,42 +718,43 @@ export default function Home() {
 
       {/* Social Proof / Logos */}
       <motion.section
-        className="py-16 border-t border-neutral-200 bg-neutral-50"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.p
-            className="text-center text-sm font-semibold text-neutral-500 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Trusted by teams automating thousands of meetings worldwide
-          </motion.p>
+  className="py-16 border-t border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+>
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <motion.p
+      className="text-center text-sm font-semibold text-neutral-500 dark:text-neutral-400 mb-8"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Trusted by teams automating thousands of meetings worldwide
+    </motion.p>
 
-          <motion.div
-            className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {["Google Meet", "Zoom", "Microsoft Teams", "Slack", "Discord", "WebEx"].map((company, index) => (
-              <motion.div
-                key={index}
-                className="h-12 rounded-lg bg-white border border-neutral-200 flex items-center justify-center text-sm font-bold text-neutral-600 hover:text-neutral-900 transition-colors"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -2 }}
-              >
-                {company}
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+    <motion.div
+      className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {["Google Meet", "Zoom", "Microsoft Teams", "Slack", "Discord", "WebEx"].map((company, index) => (
+        <motion.div
+          key={index}
+          className="h-12 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-sm font-bold text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors"
+          variants={itemVariants}
+          whileHover={{ scale: 1.05, y: -2 }}
+        >
+          {company}
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</motion.section>
+
 
       <motion.section className="py-20 bg-neutral-50 dark:bg-neutral-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -1082,7 +1083,7 @@ export default function Home() {
                       animate={{ opacity: [0.5, 1, 0.5] }}
                       transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
                     >
-                      MeetBot.ai
+                      Recap.ai
                     </motion.div>
                     <div className="text-lg opacity-80">Live Demo Recording</div>
                   </div>
@@ -1180,12 +1181,12 @@ export default function Home() {
             ].map((demo, index) => (
               <motion.div key={index} className="relative group" variants={itemVariants}>
                 <motion.div
-                  className="rounded-2xl border border-neutral-200 p-8 bg-white hover:shadow-xl transition-all duration-500"
+                  className="rounded-2xl border border-neutral-200 p-8 bg-white hover:shadow-xl transition-all duration-500  dark:border-neutral-700 dark:bg-neutral-900"
                   whileHover={{ y: -5, scale: 1.02 }}
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <motion.div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${demo.color} flex items-center justify-center text-white font-bold text-lg`}
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${demo.color} flex items-center justify-center text-white font-bold text-lg dark:text-neutral-300`}
                       whileHover={{ rotate: 5, scale: 1.1 }}
                     >
                       {demo.step}
@@ -1198,7 +1199,7 @@ export default function Home() {
                     </motion.div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-neutral-900 mb-3">{demo.title}</h3>
+                  <h3 className="text-xl font-bold text-neutral-900 mb-3 dark:text-neutral-300">{demo.title}</h3>
 
                   <p className="text-neutral-600 leading-relaxed">{demo.description}</p>
 
@@ -1493,13 +1494,13 @@ export default function Home() {
 
           {/* Usage Statistics */}
           <motion.div
-            className="mt-8 rounded-2xl border border-neutral-200 p-6 bg-white"
+            className="mt-8 rounded-2xl border border-neutral-200 p-6 bg-white  dark:border-neutral-700 dark:bg-neutral-900  dark:text-neutral-400 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-xl font-bold text-neutral-900 mb-6">Feature Usage</h3>
+            <h3 className="text-xl font-bold text-neutral-900 mb-6 dark:text-neutral-400">Feature Usage</h3>
 
             <div className="space-y-4">
               {usageStats.map((stat, index) => (
@@ -1511,7 +1512,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <span className="text-sm font-medium text-neutral-700">{stat.feature}</span>
+                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-400">{stat.feature}</span>
                   <div className="flex items-center gap-3">
                     <div className="w-32 h-2 bg-neutral-100 rounded-full overflow-hidden">
                       <motion.div
@@ -1522,7 +1523,7 @@ export default function Home() {
                         transition={{ delay: index * 0.1 + 0.5, duration: 1 }}
                       />
                     </div>
-                    <span className="text-sm font-semibold text-neutral-900 w-10 text-right">{stat.usage}%</span>
+                    <span className="text-sm font-semibold text-neutral-900 w-10 text-right dark:text-neutral-400">{stat.usage}%</span>
                   </div>
                 </motion.div>
               ))}
@@ -1532,201 +1533,211 @@ export default function Home() {
       </motion.section>
 
       {/* Pricing Section */}
-      <motion.section
-        ref={pricingRef}
-        id="pricing"
-        className="py-24 bg-gradient-to-b from-neutral-50 to-white"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900 mb-4">
-              Simple, Transparent Pricing
-            </h2>
-            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Choose the perfect plan for your meeting automation needs. All plans include our core features with
-              scalable limits.
-            </p>
-          </motion.div>
+  {/* Pricing Section */}
+<motion.section
+  ref={pricingRef}
+  id="pricing"
+  className="py-24 bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-800 dark:border-neutral-700"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+>
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <motion.div
+      className="text-center mb-16 dark:text-neutral-400"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900 mb-4 dark:text-white">
+        Simple, Transparent Pricing
+      </h2>
+      <p className="text-lg text-neutral-600 max-w-2xl mx-auto dark:text-neutral-300">
+        Choose the perfect plan for your meeting automation needs. All plans include our core features with
+        scalable limits.
+      </p>
+    </motion.div>
 
-          <motion.div
-            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView={isPricingInView ? "visible" : "hidden"}
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                name: "Starter",
-                price: "$29",
-                period: "/month",
-                description: "Perfect for small teams getting started with meeting automation",
-                features: [
-                  "Up to 50 meetings/month",
-                  "Basic transcription",
-                  "7-day recording storage",
-                  "Email support",
-                  "REST API access",
-                ],
-                popular: false,
-                color: "border-neutral-200",
-              },
-              {
-                name: "Professional",
-                price: "$99",
-                period: "/month",
-                description: "Advanced features for growing teams and businesses",
-                features: [
-                  "Up to 500 meetings/month",
-                  "Advanced AI transcription",
-                  "30-day recording storage",
-                  "Priority support",
-                  "Advanced analytics",
-                  "Custom integrations",
-                  "Team collaboration",
-                ],
-                popular: true,
-                color: "border-black ring-2 ring-black",
-              },
-              {
-                name: "Enterprise",
-                price: "Custom",
-                period: "",
-                description: "Tailored solutions for large organizations",
-                features: [
-                  "Unlimited meetings",
-                  "Custom AI models",
-                  "Unlimited storage",
-                  "24/7 dedicated support",
-                  "On-premise deployment",
-                  "Custom integrations",
-                  "SLA guarantees",
-                  "Advanced security",
-                ],
-                popular: false,
-                color: "border-neutral-200",
-              },
-            ].map((plan, index) => (
-              <motion.div
-                key={index}
-                className={`relative rounded-2xl border ${plan.color} p-8 bg-white hover:shadow-xl transition-all duration-500`}
-                variants={itemVariants}
-                whileHover={{
-                  scale: 1.02,
-                  y: -5,
-                  boxShadow: plan.popular ? "0 25px 50px rgba(0,0,0,0.2)" : "0 25px 50px rgba(0,0,0,0.1)",
-                }}
-              >
-                {plan.popular && (
-                  <motion.div
-                    className="absolute -top-4 left-1/2 transform -translate-x-1/2"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    <Badge className="bg-black text-white px-4 py-1">Most Popular</Badge>
-                  </motion.div>
-                )}
+    <motion.div
+      className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView={isPricingInView ? "visible" : "hidden"}
+      viewport={{ once: true }}
+    >
+      {[
+        {
+          name: "Starter",
+          price: "$29",
+          period: "/month",
+          description: "Perfect for small teams getting started with meeting automation",
+          features: [
+            "Up to 50 meetings/month",
+            "Basic transcription",
+            "7-day recording storage",
+            "Email support",
+            "REST API access",
+          ],
+          popular: false,
+          color: "border-neutral-200 dark:border-neutral-700",
+          bg: "bg-white dark:bg-neutral-850",
+        },
+        {
+          name: "Professional",
+          price: "$99",
+          period: "/month",
+          description: "Advanced features for growing teams and businesses",
+          features: [
+            "Up to 500 meetings/month",
+            "Advanced AI transcription",
+            "30-day recording storage",
+            "Priority support",
+            "Advanced analytics",
+            "Custom integrations",
+            "Team collaboration",
+          ],
+          popular: true,
+          color: "border-black dark:border-neutral-600 ring-2 ring-black dark:ring-2 dark:ring-neutral-600",
+          bg: "bg-white dark:bg-neutral-800",
+        },
+        {
+          name: "Enterprise",
+          price: "Custom",
+          period: "",
+          description: "Tailored solutions for large organizations",
+          features: [
+            "Unlimited meetings",
+            "Custom AI models",
+            "Unlimited storage",
+            "24/7 dedicated support",
+            "On-premise deployment",
+            "Custom integrations",
+            "SLA guarantees",
+            "Advanced security",
+          ],
+          popular: false,
+          color: "border-neutral-200 dark:border-neutral-700",
+          bg: "bg-white dark:bg-neutral-850",
+        },
+      ].map((plan, index) => (
+        <motion.div
+          key={index}
+          className={`relative rounded-2xl border ${plan.color} p-8 ${plan.bg} hover:shadow-xl transition-all duration-500  dark:border-neutral-700 dark:bg-neutral-900`}
+          variants={itemVariants}
+          whileHover={{
+            scale: 1.02,
+            y: -5,
+            boxShadow: plan.popular ? "0 25px 50px rgba(0,0,0,0.2)" : "0 25px 50px rgba(0,0,0,0.08)",
+          }}
+        >
+          {plan.popular && (
+            <motion.div
+              className="absolute -top-4 left-1/2 transform -translate-x-1/2"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Badge className="bg-black text-white px-4 py-1 dark:bg-neutral-200 dark:text-black">
+                Most Popular
+              </Badge>
+            </motion.div>
+          )}
 
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-2">{plan.name}</h3>
-                  <div className="flex items-baseline justify-center gap-1 mb-4">
-                    <span className="text-4xl font-black text-neutral-900">{plan.price}</span>
-                    <span className="text-neutral-600">{plan.period}</span>
-                  </div>
-                  <p className="text-sm text-neutral-600">{plan.description}</p>
-                </div>
-
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <motion.li
-                      key={featureIndex}
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: featureIndex * 0.1 }}
-                    >
-                      <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm text-neutral-700">{feature}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-
-                <motion.button
-                  className={`w-full rounded-full py-3 px-6 text-sm font-semibold transition-all duration-300 ${
-                    plan.popular
-                      ? "bg-black text-white hover:opacity-90"
-                      : "border border-neutral-300 text-neutral-900 hover:bg-neutral-50"
-                  }`}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {plan.name === "Enterprise" ? "Contact Sales" : "Start Free Trial"}
-                </motion.button>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Pricing FAQ */}
-          <motion.div
-            className="mt-16 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
-            <h3 className="text-2xl font-bold text-center text-neutral-900 mb-8">Frequently Asked Questions</h3>
-
-            <div className="space-y-4">
-              {[
-                {
-                  question: "How does the meeting automation work?",
-                  answer:
-                    "Our bot uses Selenium WebDriver with pre-authenticated Chrome profiles to automatically join Google Meet sessions, record audio/video, and process transcriptions using Whisper AI.",
-                },
-                {
-                  question: "What's included in the transcription accuracy?",
-                  answer:
-                    "Our Whisper AI integration provides 99.2% accuracy across multiple languages, with real-time processing and automatic punctuation, speaker identification, and timestamp generation.",
-                },
-                {
-                  question: "Can I integrate with my existing tools?",
-                  answer:
-                    "Yes! Our REST API allows seamless integration with your existing workflow tools, CRM systems, and collaboration platforms. We also provide webhooks for real-time notifications.",
-                },
-                {
-                  question: "Is my data secure?",
-                  answer:
-                    "Absolutely. We use enterprise-grade AES-256 encryption, comply with GDPR and SOC 2 standards, and offer on-premise deployment options for maximum security.",
-                },
-              ].map((faq, index) => (
-                <motion.div
-                  key={index}
-                  className="rounded-lg border border-neutral-200 p-6 bg-white"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <h4 className="font-semibold text-neutral-900 mb-2">{faq.question}</h4>
-                  <p className="text-sm text-neutral-600">{faq.answer}</p>
-                </motion.div>
-              ))}
+          <div className="text-center mb-8 ">
+            <h3 className="text-2xl font-bold text-neutral-900 mb-2 dark:text-white">{plan.name}</h3>
+            <div className="flex items-baseline justify-center gap-1 mb-4">
+              <span className="text-4xl font-black text-neutral-900 dark:text-white">{plan.price}</span>
+              <span className="text-neutral-600 dark:text-neutral-400">{plan.period}</span>
             </div>
+            <p className="text-sm text-neutral-600 dark:text-neutral-300">{plan.description}</p>
+          </div>
+
+          <ul className="space-y-3 mb-8">
+            {plan.features.map((feature, featureIndex) => (
+              <motion.li
+                key={featureIndex}
+                className="flex items-center gap-3"
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: featureIndex * 0.06 }}
+              >
+                {/* icon color adapts in dark mode */}
+                <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400 flex-shrink-0" />
+                <span className="text-sm text-neutral-700 dark:text-neutral-300">{feature}</span>
+              </motion.li>
+            ))}
+          </ul>
+
+          <motion.button
+            className={`w-full rounded-full py-3 px-6 text-sm font-semibold transition-all duration-300 ${
+              plan.popular
+                ? "bg-black text-white hover:opacity-90 dark:bg-white dark:text-black"
+                : "border border-neutral-300 text-neutral-900 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-200 dark:bg-transparent dark:hover:bg-neutral-800"
+            }`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {plan.name === "Enterprise" ? "Contact Sales" : "Start Free Trial"}
+          </motion.button>
+        </motion.div>
+      ))}
+    </motion.div>
+
+    {/* Pricing FAQ */}
+    <motion.div
+      className="mt-16 max-w-3xl mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.5 }}
+    >
+      <h3 className="text-2xl font-bold text-center text-neutral-900 mb-8 dark:text-white">
+        Frequently Asked Questions
+      </h3>
+
+      <div className="space-y-4">
+        {[
+          {
+            question: "How does the meeting automation work?",
+            answer:
+              "Our bot uses Selenium WebDriver with pre-authenticated Chrome profiles to automatically join Google Meet sessions, record audio/video, and process transcriptions using Whisper AI.",
+          },
+          {
+            question: "What's included in the transcription accuracy?",
+            answer:
+              "Our Whisper AI integration provides 99.2% accuracy across multiple languages, with real-time processing and automatic punctuation, speaker identification, and timestamp generation.",
+          },
+          {
+            question: "Can I integrate with my existing tools?",
+            answer:
+              "Yes! Our REST API allows seamless integration with your existing workflow tools, CRM systems, and collaboration platforms. We also provide webhooks for real-time notifications.",
+          },
+          {
+            question: "Is my data secure?",
+            answer:
+              "Absolutely. We use enterprise-grade AES-256 encryption, comply with GDPR and SOC 2 standards, and offer on-premise deployment options for maximum security.",
+          },
+        ].map((faq, index) => (
+          <motion.div
+            key={index}
+            className="rounded-lg border border-neutral-200 p-6 bg-white dark:bg-neutral-850 dark:border-neutral-700"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <h4 className="font-semibold text-neutral-900 mb-2 ">{faq.question}</h4>
+            <p className="text-sm text-neutral-600 dark:text-neutral-600">{faq.answer}</p>
           </motion.div>
-        </div>
-      </motion.section>
+        ))}
+      </div>
+    </motion.div>
+  </div>
+</motion.section>
+
 
       {/* Final CTA Section */}
       <motion.section
@@ -1850,7 +1861,7 @@ export default function Home() {
       </motion.section>
 
       {/* Footer */}
-      <footer className="py-16 border-t border-neutral-200 bg-white">
+      <footer className="py-16 border-t border-neutral-200 bg-white  dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             className="grid md:grid-cols-4 gap-8 mb-12"
@@ -1864,9 +1875,9 @@ export default function Home() {
                 <div className="h-8 w-8 rounded-lg bg-black flex items-center justify-center">
                   <Bot className="h-4 w-4 text-white" />
                 </div>
-                <span className="text-xl font-black">MeetBot.ai</span>
+                <span className="text-xl font-black">Recap.ai</span>
               </motion.div>
-              <p className="text-sm text-neutral-600 mb-4">
+              <p className="text-sm text-neutral-600 mb-4 dark:text-neutral-300">
                 Intelligent meeting automation powered by Selenium, Whisper AI, and modern web technologies.
               </p>
               <div className="flex gap-3">
@@ -1874,7 +1885,7 @@ export default function Home() {
                   <motion.a
                     key={social}
                     href="#"
-                    className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-600 hover:bg-black hover:text-white transition-colors"
+                    className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-600 hover:bg-black hover:text-white transition-colors dark:text-neutral-400 dark:hover:text-white"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.9 }}
                   >
@@ -1887,7 +1898,7 @@ export default function Home() {
             {/* Product */}
             <div>
               <h4 className="font-semibold text-neutral-900 mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-neutral-600">
+              <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-400 ">
                 {["Features", "Pricing", "API Documentation", "Integrations", "Changelog"].map((item, index) => (
                   <motion.li
                     key={item}
@@ -1907,7 +1918,7 @@ export default function Home() {
             {/* Company */}
             <div>
               <h4 className="font-semibold text-neutral-900 mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-neutral-600">
+              <ul className="space-y-2 text-sm text-neutral-600  dark:text-neutral-400">
                 {["About Us", "Blog", "Careers", "Press", "Contact"].map((item, index) => (
                   <motion.li
                     key={item}
@@ -1927,7 +1938,7 @@ export default function Home() {
             {/* Support */}
             <div>
               <h4 className="font-semibold text-neutral-900 mb-4">Support</h4>
-              <ul className="space-y-2 text-sm text-neutral-600">
+              <ul className="space-y-2 text-sm text-neutral-600  dark:text-neutral-400">
                 {["Help Center", "Community", "Status", "Security", "Privacy"].map((item, index) => (
                   <motion.li
                     key={item}
