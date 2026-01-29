@@ -11,7 +11,7 @@ connectDB();
 
 app.use(express.json()); // ✅ This enables parsing JSON bodies
 const corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "https://recap-ai-omega.vercel.app","https://recapai.in"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
