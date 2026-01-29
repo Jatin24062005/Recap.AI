@@ -31,9 +31,11 @@ import {
   SkipForward,
   Sun,
   Moon,
+  Cookie
 } from "lucide-react"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
   import type { Variants } from "framer-motion"
+  import axiosInstance from "./../lib/axios"
 
 import {
   LineChart,
@@ -53,6 +55,8 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { LoginModal } from "@/components/login-modal"
 import { Dashboard } from "@/components/dashboard"
+import Cookies from "js-cookie"
+import { toast } from "sonner"
 
 // Sample data for charts
 const meetingData = [
@@ -122,13 +126,71 @@ export default function Home() {
     document.documentElement.classList.toggle("dark")
   }
 
-  const handleLogin = () => {
-    setIsAuthenticated(true)
+  const handleLogin =  async (email: string, password: string) => {
+    //no login
+    try{
+     const response = await axiosInstance.post("/user/login",{
+      email,
+      password
+     })
+     const data = response.data
+     if(data.token){
+        Cookies.set("token", data.token)
+        Cookies.set("user", JSON.stringify(data.user))
+        setIsAuthenticated(true)
+        setIsLoginModalOpen(false)
+        toast.success("Login successful!")
+     }
+    }catch(err){
+      toast.error("Login failed. Please check your credentials.")
+      console.error("Login failed:", err)
+    }
+  }
+   const handleSignup = async (name: string, email: string, password: string) => {
+    try{
+     const response = await axiosInstance.post("/user/signup",{
+      name,
+      email,
+      password
+     })
+     const data = response.data
+     if(data.token){
+        Cookies.set("token", data.token)
+        Cookies.set("user", JSON.stringify(data.user))
+        setIsAuthenticated(true)
+        setIsLoginModalOpen(false)
+        toast.success("Signup successful!")
+     }
+    }catch(err){
+      toast.error("Signup failed. Please check your credentials.")
+      console.error("Signup failed:", err)
+    }
   }
 
   const handleLogout = () => {
+    Cookies.remove("token")
+    Cookies.remove("user")
     setIsAuthenticated(false)
+    toast.success("Logged out successfully!")
   }
+  const handleStartBot = (url: string) => { 
+    
+    if(!url){
+      toast.warning("Please enter a valid Google Meet URL.")
+      return
+    }
+    const user = Cookies.get("user")
+    if(user){
+      toast.success("Bot started successfully!")
+    } else{
+      toast.error("Please login to start the bot.")
+       setLoginMode("login")
+                setIsLoginModalOpen(true)
+      
+    }
+  }
+
+
 
   // Simulate real-time updates
   useEffect(() => {
@@ -431,10 +493,7 @@ export default function Home() {
                     }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => {
-                      if (meetUrl) {
-                        console.log("Starting bot for:", meetUrl)
-                        // Handle bot start logic
-                      }
+                      handleStartBot(meetUrl)
                     }}
                   >
                     <Play className="mr-2 h-4 w-4" />
@@ -1988,6 +2047,7 @@ export default function Home() {
         mode={loginMode}
         onModeChange={setLoginMode}
         onLogin={handleLogin}
+        onSignUp={handleSignup}
       />
     </div>
   )

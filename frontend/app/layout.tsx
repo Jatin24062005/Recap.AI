@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 // import { ThemeProvider } from "@/components/theme-provider"
 import { Suspense } from "react"
+import { Toaster } from "sonner"
 
 export const metadata: Metadata = {
   title: "Recap.AI",
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange> */}
             {children}
+            <Toaster/>
           {/* </ThemeProvider> */}
         </Suspense>
         <Analytics />

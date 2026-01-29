@@ -14,10 +14,11 @@ interface LoginModalProps {
   onClose: () => void
   mode: "login" | "signup"
   onModeChange: (mode: "login" | "signup") => void
-  onLogin: () => void
+  onLogin: (email: string, password: string) => void
+  onSignUp: (name: string, email: string, password: string) => void
 }
 
-export function LoginModal({ isOpen, onClose, mode, onModeChange, onLogin }: LoginModalProps) {
+export function LoginModal({ isOpen, onClose, mode, onModeChange, onLogin , onSignUp}: LoginModalProps) {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
@@ -28,8 +29,12 @@ export function LoginModal({ isOpen, onClose, mode, onModeChange, onLogin }: Log
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log(`${mode} attempt:`, formData)
-    onLogin()
-    onClose()
+    if(mode === "signup"){
+          onSignUp(formData.name, formData.email, formData.password)
+    }else if(mode === "login"){
+          onLogin(formData.email, formData.password)
+
+    }
   }
 
   return (
